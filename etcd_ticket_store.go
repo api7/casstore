@@ -52,13 +52,13 @@ func (s *etcdTicketStore) Read(id string) (*cas.AuthenticationResponse, error) {
 		return nil, cas.ErrInvalidTicket
 	}
 
-	var ticket cas.AuthenticationResponse
-	err = json.Unmarshal(resp.Kvs[0].Value, &ticket)
+	var rsp *cas.AuthenticationResponse
+	err = json.Unmarshal(resp.Kvs[0].Value, &rsp)
 	if err != nil {
 		return nil, cas.ErrInvalidTicket
 	}
 
-	return &ticket, nil
+	return rsp, nil
 }
 
 // Write stores the AuthenticationResponse for a ticket
